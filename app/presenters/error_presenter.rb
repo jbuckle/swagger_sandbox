@@ -1,4 +1,6 @@
 class ErrorPresenter < Presenter
-  expose_typed_attribute :http_status, Integer, 'HTTP code associated with this error'
-  expose_typed_attribute :message, String, 'The message associated with this error'
+  include Grape::Entity::DSL
+
+  will_attribute :http_status, Integer, 'HTTP Status Code'
+  will_attribute :message, String, 'Human readable description of the error message'
 end

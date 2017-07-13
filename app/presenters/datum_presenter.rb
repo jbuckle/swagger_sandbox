@@ -1,6 +1,6 @@
 class DatumPresenter < Presenter
-  expose_typed_attribute :id, Integer, { desc: 'The ID', type: 'Integer' }
-  expose_typed_attribute :details, String, { desc: 'Details', type: 'String' }
+  include Grape::Entity::DSL
 
-  build_entity_definition!
+  will_attribute :id, Integer, 'Id of this Datum'
+  will_attribute :errors, Array[ErrorPresenter], 'Some description'
 end

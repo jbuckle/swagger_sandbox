@@ -4,8 +4,8 @@ class TestAPI < Grape::API
 
   desc 'Ask for some data' do
     detail 'Returns data based on the ID you passed.  Also takes a list of fields to filter the returned object with'
-    success DatumPresenter
-    failure [[404, 'Not Found', 'ErrorPresenter']]
+    success DatumPresenter::Entity
+    failure [[404, 'Not Found', 'ErrorPresenter::Entity']]
   end
 
   params do
@@ -14,7 +14,7 @@ class TestAPI < Grape::API
   end
 
   get :data do
-    e = DatumPresenter.new(id: 'doog', details: 'Returned')
-    present e
+    others = [DatumPresenter.new(id: params[:id].to_i + 100, details: 'Another', is_good: false)]
+    DatumPresenter.new(id: params[:id], details: 'These are some example details', is_good: false, others: others)
   end
 end
