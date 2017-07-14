@@ -11,10 +11,17 @@ class TestAPI < Grape::API
   params do
     requires :id, type: String, desc: 'ID of datum that you are requesting'
     optional :fields, type: Array[String], desc: 'Fields that you want'
+    optional :success, type: Boolean, desc: 'Whether the request should succeed or not'
   end
 
   get :data do
-    others = [DatumPresenter.new(id: params[:id].to_i + 100, details: 'Another', is_good: false)]
-    DatumPresenter.new(id: params[:id], details: 'These are some example details', is_good: false, others: others)
+    # SomeService that returns a context object here
+    context = {
+      data: DatumPresenter.new(id: 100, errors: [ErrorPresenter.new(http_status: 500, message: 'Bad bad not good')]),
+      error: ErrorPresenter.new(http_status: 404, message: 'Not Found!'),
+      success: params[:success]
+    }
+
+    context[:success] ? context[:data] : context[:error]
   end
 end

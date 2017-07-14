@@ -1,7 +1,7 @@
 class Presenter
   include Virtus.model(nullify_blank: true)
 
-  def self.will_attribute(name, klass, description, opts = {})
+  def self.typed_attribute(name, klass, description, opts = {})
     raise 'Must document all entity exposures' if description.blank?
 
     default_val = opts.delete :default_value
