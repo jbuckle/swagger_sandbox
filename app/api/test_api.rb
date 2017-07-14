@@ -2,26 +2,19 @@ class TestAPI < Grape::API
   format :json
   prefix :test
 
-  desc 'Ask for some data' do
-    detail 'Returns data based on the ID you passed.  Also takes a list of fields to filter the returned object with'
-    success DatumPresenter::Entity
-    failure [[404, 'Not Found', 'ErrorPresenter::Entity']]
+  desc 'Fetch a dummy catalog response' do
+    detail 'Also useful for seeing the schema outputted for a relatively nested response object'
+    success CatalogPresenter::Entity
+    failure [[401, 'Unauthorized', 'ErrorPresenter::Entity']]
   end
 
   params do
-    requires :id, type: String, desc: 'ID of datum that you are requesting'
-    optional :fields, type: Array[String], desc: 'Fields that you want'
-    optional :success, type: Boolean, desc: 'Whether the request should succeed or not'
+    optional :query_string, type: String, desc: 'Stringified JSON query to execute directly against the catalog'
+    optional :hit_limit, type: Integer, desc: 'Maximum number of hits to return'
+    optional :ignore_facets, type: Boolean, desc: 'Set to true to disable facet calculation (this makes everything much faster).'
   end
 
-  get :data do
-    # SomeService that returns a context object here
-    context = {
-      data: DatumPresenter.new(id: 100, errors: [ErrorPresenter.new(http_status: 500, message: 'Bad bad not good')]),
-      error: ErrorPresenter.new(http_status: 404, message: 'Not Found!'),
-      success: params[:success]
-    }
+  get :catalog do
 
-    context[:success] ? context[:data] : context[:error]
   end
 end
