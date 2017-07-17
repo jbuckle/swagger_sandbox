@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Sample application, exists to demo the presentation layer of V4 and the documentation
+that that presentation layer would output.
 
-Things you may want to cover:
+## View Redoc Documentation
 
-* Ruby version
+Start the rails server on port 3005 and navigate to localhost:3005/redoc_docs.
 
-* System dependencies
+## View Swagger-UI documentation
 
-* Configuration
+Swagger-ui is unfortunately more of a pain to get started.  You have to clone the
+swagger-ui project from github and then open the file ~/swagger-ui/dist/index.html
+in your web browser.  With the rails server running, change the URL in the top
+text input to be "http://localhost:3005/api/swagger_doc.json."  You should see the
+docs for this project appear.
 
-* Database creation
+## View Presentation Layer
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Presenters are inside app/presenters, and all subclass app/presenter/presenter.rb.
