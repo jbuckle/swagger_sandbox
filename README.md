@@ -5,7 +5,7 @@ that that presentation layer would output.
 
 ## View Redoc Documentation
 
-Start the rails server on port 3005 and navigate to localhost:3005/redoc_docs.
+Start the rails server on port 3005 and navigate to localhost:3005/redoc_index.html.
 
 ## View Swagger-UI documentation
 
